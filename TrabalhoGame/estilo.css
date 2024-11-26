@@ -1,7 +1,25 @@
 .titulo {
-    font-size: 8vw;
+    font-size: 5vw;
 }
 
-body {
-    cursor: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cleanpng.com%2Ffree%2Fmouse-pointer.html&psig=AOvVaw2ypeffsAcRzMyqvG1fLvVM&ust=1732677362081000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKDXgq2E-YkDFQAAAAAdAAAAABAE'), auto;
+.tamanho-maior {
+    font-size: 1vw;
 }
+
+.apelido {
+    font-size: 1vw;
+}
+
+.avancar {
+    font-size: 2vw;
+}
+
+body{
+    height: 90%;
+}
+
+.conteudo{
+    height: 100vh;
+}
+
+/* Tela de Transição*/
