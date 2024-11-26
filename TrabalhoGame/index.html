@@ -6,43 +6,88 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="estilo.css">
     <title>Document</title>
+    <style>
+        .palette {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .color-box {
+            width: 30px;
+            height: 30px;
+            margin: 0 5px;
+            border: 1px solid #000;
+        }
+
+        .alinha-cores {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
 </head>
 <body>
-    <header class="text-center mt-5 mb-5">
+<div class="conteudo">
+    <header class="text-center mt-3 mb-3">
         <h1 class="titulo">Mouse Runner</h1>
     </header>
-    <main class="container w-50">
+    <main class="container w-50 h-8">
         <div>
-            <label for="apelido" class="form-label pt-5" >Apelido</label>
-            <input type="text" class="form-control" id="apelido" placeholder="Informe seu nome de jogador">
+            <label for="apelido" class="form-label pt-3 tamanho-maior">Apelido:</label>
+            <input type="text" class="form-control apelido" id="apelido" placeholder="Informe seu nome de jogador">
         </div>
-        <div class="d-flex flex-column mt-5"> 
+        <div class="d-flex flex-column mt-3"> 
             <div class="text-center">
-                <h2>Selecione o estilo visual do labirinto:</h2>
+                <h2>Selecione o tema do labirinto:</h2>
             </div>
-            <div class="d-flex justify-content-around mt-5">
-                <input type="radio" class="btn-check" name="estilo" id="option1" autocomplete="off">
-                <label class="btn btn-outline-success" for="option1">Fácil</label>
-                <input type="radio" class="btn-check" name="estilo" id="option2" autocomplete="off">
-                <label class="btn btn-outline-warning" for="option2">Médio</label>
-                <input type="radio" class="btn-check" name="estilo" id="option3" autocomplete="off">
-                <label class="btn btn-outline-danger" for="option3">Difícil</label>
+            <div class="d-flex justify-content-between mt-5">
+                <div class="alinha-cores">
+                    <input type="radio" class="btn-check" name="estilo" id="option1" autocomplete="off">
+                    <label class="btn btn-outline-success tamanho-maior" for="option1">Floresta Silenciosa</label>
+                    <div class="palette">
+                    <div class="color-box" style="background-color: #556B2F;"></div>
+                    <div class="color-box" style="background-color: #3E2723;"></div>
+                    <div class="color-box" style="background-color: #B0BEC5;"></div>
+                    </div>
+                </div>
+
+                <div class="alinha-cores">
+                    <input type="radio" class="btn-check" name="estilo" id="option2" autocomplete="off">
+                    <label class="btn btn-outline-primary tamanho-maior" for="option2">Inverno Sombrio</label>
+                    <div class="palette">
+                        <div class="color-box" style="background-color: #607D8B;"></div>
+                        <div class="color-box" style="background-color: #ECEFF1;"></div>
+                        <div class="color-box" style="background-color: #263238;"></div>
+                    </div>
+                </div>
+
+                <div class="alinha-cores">
+                    <input type="radio" class="btn-check" name="estilo" id="option3" autocomplete="off">
+                    <label class="btn btn-outline-danger tamanho-maior" for="option3">Castelo em Chamas</label>
+                    <div class="palette">
+                        <div class="color-box" style="background-color: #FF5722;"></div>
+                        <div class="color-box" style="background-color: #37474F;"></div>
+                        <div class="color-box" style="background-color: #FFAB40;"></div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="d-flex flex-column mt-5"> 
             <div class="text-center">
                 <h2>Selecione a Dificuldade:</h2>
             </div>
-            <div class="d-flex justify-content-around mt-5">
+            <div class="d-flex justify-content-between mt-3">
                 <input type="radio" class="btn-check" name="dificuldade" id="easy" autocomplete="off">
-                <label class="btn btn-outline-success" for="easy">Fácil</label>
+                <label class="btn btn-outline-success tamanho-maior" for="easy">Fácil</label>
                 <input type="radio" class="btn-check" name="dificuldade" id="medium" autocomplete="off">
-                <label class="btn btn-outline-warning" for="medium">Médio</label>
+                <label class="btn btn-outline-warning tamanho-maior" for="medium">Médio</label>
                 <input type="radio" class="btn-check" name="dificuldade" id="hard" autocomplete="off">
-                <label class="btn btn-outline-danger" for="hard">Difícil</label>
+                <label class="btn btn-outline-danger tamanho-maior" for="hard">Difícil</label>
             </div>
         </div>
+        <div class="text-center mt-5">
+            <button class="btn btn-secondary avancar">Avançar</button>
+        </div>
     </main>
+</div>
 </body>
 </html>
-
