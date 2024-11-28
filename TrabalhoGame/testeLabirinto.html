@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -101,11 +101,22 @@
 </style>
 <body>
     <div id="labirinto">
-        <div id="inicio">Inicio</div>
-        <div id="fim">Fim</div>
+        <div id="inicio"><b>Inicio</b></div>
+        <div id="fim"><b>Fim</b></div>
     </div>
-    
-    <div id="cronometro">00:00</div> <!-- Cronômetro -->
+    <div id="cronometro">00:00</div>
+
+    <table id="resultados">
+        <thead>
+            <tr>
+                <th>Jogador</th>
+                <th>Tempo</th>
+            </tr>
+            <tbody>
+
+            </tbody>
+        </thead>
+    </table>
 
     <!-- Modal -->
     <div id="modal">
@@ -214,6 +225,23 @@
     document.getElementById('fim').addEventListener('mouseover', () => {
         pararCronometro();
         mostrarModal();
+
+        let dados = JSON.parse(localStorage.getItem('resultadosLista')) || [];
+        let nome = localStorage.getItem('nome');
+        let tempo = document.getElementById('cronometro').textContent;
+
+        dados.push({ nome, tempo });
+    
+        localStorage.setItem('resultadosLista', JSON.stringify(dados));
+
+        if (dados.length > 0) {
+        console.log('Dados armazenados no localStorage:');
+        dados.forEach((item, index) => {
+            console.log(`Item ${index + 1}: Nome = ${item.nome}, Tempo = ${item.tempo}`);
+        });
+        } else {
+        console.log('Nenhum dado encontrado no localStorage.');
+        }
     });
 
     // Iniciar o cronômetro quando a página carregar

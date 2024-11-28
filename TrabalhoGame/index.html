@@ -27,71 +27,97 @@
     </style>
 </head>
 <body>
-<div class="conteudo">
+<main class="conteudo">
     <header class="text-center mt-3 mb-3">
         <h1 class="titulo">Mouse Runner</h1>
     </header>
-    <main class="container w-50 h-8">
-        <div>
-            <label for="apelido" class="form-label pt-3 tamanho-maior">Apelido:</label>
-            <input type="text" class="form-control apelido" id="apelido" placeholder="Informe seu nome de jogador">
-        </div>
-        <div class="div-opcoes"> 
-            <div class="text-center">
-                <h2>Selecione o tema do labirinto:</h2>
-            </div>
-            <div class="d-flex justify-content-between mt-5">
-                <div class="alinha-cores">
-                    <input type="radio" class="btn-check" name="estilo" id="option1" autocomplete="off" value="">
-                    <label class="btn btn-outline-success tamanho-maior" for="option1">Floresta Silenciosa</label>
-                    <div class="palette">
-                    <div class="color-box" style="background-color: #556B2F;"></div>
-                    <div class="color-box" style="background-color: #3E2723;"></div>
-                    <div class="color-box" style="background-color: #B0BEC5;"></div>
-                    </div>
-                </div>
-
-                <div class="alinha-cores">
-                    <input type="radio" class="btn-check" name="estilo" id="option2" autocomplete="off">
-                    <label class="btn btn-outline-primary tamanho-maior" for="option2">Inverno Sombrio</label>
-                    <div class="palette">
-                        <div class="color-box" style="background-color: #607D8B;"></div>
-                        <div class="color-box" style="background-color: #ECEFF1;"></div>
-                        <div class="color-box" style="background-color: #263238;"></div>
-                    </div>
-                </div>
-
-                <div class="alinha-cores">
-                    <input type="radio" class="btn-check" name="estilo" id="option3" autocomplete="off">
-                    <label class="btn btn-outline-danger tamanho-maior" for="option3">Castelo em Chamas</label>
-                    <div class="palette">
-                        <div class="color-box" style="background-color: #FF5722;"></div>
-                        <div class="color-box" style="background-color: #37474F;"></div>
-                        <div class="color-box" style="background-color: #FFAB40;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="div-opcoes"> 
-            <div class="text-center">
-                <h2>Selecione a Dificuldade:</h2>
-            </div>
-            <div class="d-flex justify-content-between mt-3">
-                <input type="radio" class="btn-check" name="dificuldade" id="easy" autocomplete="off">
-                <label class="btn btn-outline-success tamanho-maior" for="easy">Fácil</label>
-                <input type="radio" class="btn-check" name="dificuldade" id="medium" autocomplete="off">
-                <label class="btn btn-outline-warning tamanho-maior" for="medium">Médio</label>
-                <input type="radio" class="btn-check" name="dificuldade" id="hard" autocomplete="off">
-                <label class="btn btn-outline-danger tamanho-maior" for="hard">Difícil</label>
-            </div>
-        </div>
-        <div class="text-center mt-5">
-            <a href="transicao.html"><button class="btn btn-secondary avancar">Avançar</button></a>
-        </div>
-    </main>
-</div>
+    <section class="container w-50 h-8">
+        <form id="formulario">
+            <section>
+                <label for="apelido" class="form-label pt-3 tamanho-maior">Nome:</label>
+                <input type="text" class="form-control apelido" id="nome" placeholder="Informe seu nome de jogador" required>
+            </section>
+            <section class="div-opcoes"> 
+                <section class="text-center">
+                    <h2>Selecione o tema do labirinto:</h2>
+                </section>
+                <section class="d-flex justify-content-between mt-5">
+                    <section class="alinha-cores">
+                        <input type="radio" class="btn-check" name="estilo" id="option1" autocomplete="off" value="floresta" required>
+                        <label class="btn btn-outline-success tamanho-maior" for="option1">Floresta Silenciosa</label>
+                        <section class="palette">
+                        <section class="color-box" style="background-color: #556B2F;"></section>
+                        <section class="color-box" style="background-color: #3E2723;"></section>
+                        <section class="color-box" style="background-color: #B0BEC5;"></section>
+                        </section>
+                    </section>
+    
+                    <section class="alinha-cores">
+                        <input type="radio" class="btn-check" name="estilo" id="option2" autocomplete="off" value="inverno" required>
+                        <label class="btn btn-outline-primary tamanho-maior" for="option2">Inverno Sombrio</label>
+                        <section class="palette">
+                            <section class="color-box" style="background-color: #607D8B;"></section>
+                            <section class="color-box" style="background-color: #ECEFF1;"></section>
+                            <section class="color-box" style="background-color: #263238;"></section>
+                        </section>
+                    </section>
+    
+                    <section class="alinha-cores">
+                        <input type="radio" class="btn-check" name="estilo" id="option3" autocomplete="off" value="castelo" required>
+                        <label class="btn btn-outline-danger tamanho-maior" for="option3">Castelo em Chamas</label>
+                        <section class="palette">
+                            <section class="color-box" style="background-color: #FF5722;"></section>
+                            <section class="color-box" style="background-color: #37474F;"></section>
+                            <section class="color-box" style="background-color: #FFAB40;"></section>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="div-opcoes"> 
+                <section class="text-center">
+                    <h2>Selecione a Dificuldade:</h2>
+                </section>
+                <section class="d-flex justify-content-between mt-3">
+                    <input type="radio" class="btn-check" name="dificuldade" id="easy" autocomplete="off" value="facil" required>
+                    <label class="btn btn-outline-success tamanho-maior" for="easy">Fácil</label>
+                    <input type="radio" class="btn-check" name="dificuldade" id="medium" autocomplete="off" value="medio" required>
+                    <label class="btn btn-outline-warning tamanho-maior" for="medium">Médio</label>
+                    <input type="radio" class="btn-check" name="dificuldade" id="hard" autocomplete="off" value="dificil" required>
+                    <label class="btn btn-outline-danger tamanho-maior" for="hard">Difícil</label>
+                </section>
+            </section>
+            <section class="text-center mt-5">
+                <button type="submit" class="btn btn-secondary avancar">Avançar</button>
+            </section>
+        </form>
+    </section>
+</main>
 <script>
+    const formulario = document.getElementById("formulario");
+    
+    // Alteração aqui: O listener de evento deve ser "submit" e a função Avancar precisa de preventDefault
+    formulario.addEventListener("submit", function(event) {
+        event.preventDefault();  // Impede o comportamento padrão de envio do formulário
+        Avancar();  // Chama a função de avançar
+    });
 
+    function Avancar() {
+        const nome = document.getElementById("nome").value;
+        const estiloCores = document.querySelector('input[name="estilo"]:checked').value;
+        const dificuldade = document.querySelector('input[name="dificuldade"]:checked').value;
+
+        // Armazenando os dados no localStorage
+        localStorage.setItem('nome', nome);
+        localStorage.setItem('estiloCores', estiloCores);
+        localStorage.setItem('dificuldade', dificuldade);
+
+        // Exibe o nome no console
+        console.log(localStorage.getItem('nome'));
+
+        // Redireciona para outra página
+        window.location.href = 'transicao.html';
+    }
 </script>
 </body>
 </html>
+
