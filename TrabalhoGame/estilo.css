@@ -40,6 +40,19 @@ body{
     position: absolute;
 }
 
+.ponto-final {
+    display: flex;
+    width: 150px;
+    height: 150px;
+    padding: 2%;
+    background-color: rgb(219, 219, 219);
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
 .tamanho-maior2 {
     font-size: 2vw;
 }

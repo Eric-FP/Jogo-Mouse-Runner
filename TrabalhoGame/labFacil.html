@@ -40,12 +40,37 @@
             width: 10px; /* Largura da borda direita */
             height: 100%;
         }
+
+        .parede {
+            width: 2vw;
+            height: 20vh; /* Exemplo de altura inicial */
+            background-color: #000;
+        }
+
+        .parede.horizontal {
+            transform: rotate(90deg);
+            transform-origin: left;
+        }
+        #labirinto {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr); /* 7 colunas (baseado na matriz) */
+            grid-template-rows: repeat(5, 1fr); /* 5 linhas (baseado na matriz) */
+            width: 350px; /* Tamanho total */
+            height: 250px; /* Tamanho total */
+            border: 2px solid #000; /* Apenas para visualização */
+            position: relative;
+}
 </style>
-<body class="fundoLabFacil">
+<body>
+    <div class="labirinto" id="labirinto">
     <div class="ponto-inicial text-center"><p class="tamanho-maior2">Inicio</p></div>
-    <div class="borda top"></div>
-    <div class="borda bottom"></div>
-    <div class="borda left"></div>
-    <div class="borda right"></div>
+    <div class="ponto-final text-center"><p class="tamanho-maior2">Fim</p></div>
+
+        <div class="borda top"></div>
+        <div class="borda bottom"></div>
+        <div class="borda left"></div>
+        <div class="borda right"></div>
+
+    </div>
 </body>
 </html>

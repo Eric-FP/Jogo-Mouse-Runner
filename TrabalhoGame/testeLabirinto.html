@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+    }
+
+    #labirinto {
+        display: grid;
+        grid-template-columns: repeat(15, 1fr);
+        grid-template-rows: repeat(15, 1fr);
+        width: 80vw; /* 80% da largura da janela */
+        height: 100vh; /* 100% da altura da janela */
+        border: 2px solid #000;
+        position: relative;
+        background-color: #f0f0f0;
+        box-sizing: border-box;
+    }
+
+    #inicio, #fim {
+        background-color: #4CAF50;
+        z-index: 1;
+    }
+
+    #inicio {
+        grid-column: 2;
+        grid-row: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #fim {
+        grid-column: 14;
+        grid-row: 14;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .parede {
+        background-color: black;
+        border: 1px solid black;
+        cursor: pointer;
+    }
+
+    /* Estilos para o cronômetro */
+    #cronometro {
+        position: fixed;
+        right: 0;
+        top: 5%;
+        transform: translateY(-50%);
+        width: 20vw;
+        height: 10%;
+        background-color: #333;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5em;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Estilos do Modal */
+    #modal {
+        display: none; /* Inicialmente oculto */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+    }
+
+    #modal .modal-content {
+        background-color: white;
+        padding: 20px;
+        text-align: center;
+        border-radius: 8px;
+        width: 300px;
+    }
+
+    #modal button {
+        margin: 10px;
+        padding: 10px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+</style>
+<body>
+    <div id="labirinto">
+        <div id="inicio">Inicio</div>
+        <div id="fim">Fim</div>
+    </div>
+    
+    <div id="cronometro">00:00</div> <!-- Cronômetro -->
+
+    <!-- Modal -->
+    <div id="modal">
+        <div class="modal-content">
+            <h2>Você completou o nível!</h2>
+            <button id="menuButton">Voltar para o Menu</button>
+            <button id="jogarButton">Jogar Novamente</button>
+            <button id="proximoButton">Próximo Nível</button>
+        </div>
+    </div>
+</body>
+<script>
+    const matrizLabirinto = [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+        [1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1],
+        [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1],
+        [1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1],
+        [1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1],
+        [1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1],
+        [1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1],
+        [1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1],
+        [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1],
+        [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    ];
+
+    const labirinto = document.getElementById('labirinto');
+    const cronometroDisplay = document.getElementById('cronometro');
+    const modal = document.getElementById('modal');
+    const menuButton = document.getElementById('menuButton');
+    const jogarButton = document.getElementById('jogarButton');
+    const proximoButton = document.getElementById('proximoButton');
+    let cronometroInterval;
+    let tempoSegundos = 0;
+
+    // Função para criar paredes
+    function criarParede(colStart, colEnd, rowStart, rowEnd) {
+        const parede = document.createElement('div');
+        parede.classList.add('parede');
+        parede.style.gridColumn = `${colStart} / ${colEnd}`;
+        parede.style.gridRow = `${rowStart} / ${rowEnd}`;
+
+        // Adiciona o evento de mouseover na parede
+        parede.addEventListener('mouseover', () => {
+            alert('Você passou sobre uma parede! Você será redirecionado para a página de transição.');
+            window.location.href = 'transicao.html'; // Redireciona para transicao.html
+        });
+
+        labirinto.appendChild(parede);
+    }
+
+    // Função para gerar o labirinto
+    function gerarLabirinto(matriz) {
+        matriz.forEach((linha, rowIndex) => {
+            linha.forEach((celula, colIndex) => {
+                if (celula === 1) {
+                    criarParede(colIndex + 1, colIndex + 2, rowIndex + 1, rowIndex + 2);
+                }
+            });
+        });
+    }
+
+    // Função para iniciar o cronômetro
+    function iniciarCronometro() {
+        cronometroInterval = setInterval(() => {
+            tempoSegundos++;
+            let minutos = Math.floor(tempoSegundos / 60);
+            let segundos = tempoSegundos % 60;
+            cronometroDisplay.textContent = `${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}`;
+        }, 1000);
+    }
+
+    // Parar o cronômetro
+    function pararCronometro() {
+        clearInterval(cronometroInterval);
+    }
+
+    // Mostrar o modal
+    function mostrarModal() {
+        modal.style.display = 'flex'; // Exibe o modal
+    }
+
+    // Fechar o modal
+    function fecharModal() {
+        modal.style.display = 'none'; // Oculta o modal
+    }
+
+    // Ações dos botões do modal
+    menuButton.addEventListener('click', () => {
+        window.location.href = 'index.html'; // Redireciona para o menu
+    });
+
+    jogarButton.addEventListener('click', () => {
+        window.location.href = 'transicao.html'; // Redireciona para jogar novamente
+    });
+
+    proximoButton.addEventListener('click', () => {
+        alert('Próximo nível ainda não implementado.');
+    });
+
+    // Parar o cronômetro e mostrar o modal quando o mouse passar sobre o div 'fim'
+    document.getElementById('fim').addEventListener('mouseover', () => {
+        pararCronometro();
+        mostrarModal();
+    });
+
+    // Iniciar o cronômetro quando a página carregar
+    document.addEventListener('DOMContentLoaded', () => {
+        gerarLabirinto(matrizLabirinto);
+        iniciarCronometro();
+    });
+</script>
+</html>
