@@ -70,7 +70,7 @@
         font-family: Arial, sans-serif;
     }
 
-    /* Estilos do Modal */
+    
     #modal {
         display: none; /* Inicialmente oculto */
         position: fixed;
@@ -117,8 +117,7 @@
             </tbody>
         </thead>
     </table>
-
-    <!-- Modal -->
+    
     <div id="modal">
         <div class="modal-content">
             <h2>Você completou o nível!</h2>
@@ -156,14 +155,13 @@
     let cronometroInterval;
     let tempoSegundos = 0;
 
-    // Função para criar paredes
+    
     function criarParede(colStart, colEnd, rowStart, rowEnd) {
         const parede = document.createElement('div');
         parede.classList.add('parede');
         parede.style.gridColumn = `${colStart} / ${colEnd}`;
         parede.style.gridRow = `${rowStart} / ${rowEnd}`;
 
-        // Adiciona o evento de mouseover na parede
         parede.addEventListener('mouseover', () => {
             alert('Você passou sobre uma parede! Você será redirecionado para a página de transição.');
             window.location.href = 'transicao.html'; // Redireciona para transicao.html
@@ -172,7 +170,7 @@
         labirinto.appendChild(parede);
     }
 
-    // Função para gerar o labirinto
+    
     function gerarLabirinto(matriz) {
         matriz.forEach((linha, rowIndex) => {
             linha.forEach((celula, colIndex) => {
@@ -183,7 +181,7 @@
         });
     }
 
-    // Função para iniciar o cronômetro
+    
     function iniciarCronometro() {
         cronometroInterval = setInterval(() => {
             tempoSegundos++;
@@ -193,35 +191,34 @@
         }, 1000);
     }
 
-    // Parar o cronômetro
+    
     function pararCronometro() {
         clearInterval(cronometroInterval);
     }
 
-    // Mostrar o modal
+    
     function mostrarModal() {
-        modal.style.display = 'flex'; // Exibe o modal
+        modal.style.display = 'flex'; 
     }
 
-    // Fechar o modal
+    
     function fecharModal() {
-        modal.style.display = 'none'; // Oculta o modal
+        modal.style.display = 'none'; 
     }
 
-    // Ações dos botões do modal
+    
     menuButton.addEventListener('click', () => {
-        window.location.href = 'index.html'; // Redireciona para o menu
+        window.location.href = 'index.html'; 
     });
 
     jogarButton.addEventListener('click', () => {
-        window.location.href = 'transicao.html'; // Redireciona para jogar novamente
+        window.location.href = 'transicao.html'; 
     });
 
     proximoButton.addEventListener('click', () => {
         alert('Próximo nível ainda não implementado.');
     });
 
-    // Parar o cronômetro e mostrar o modal quando o mouse passar sobre o div 'fim'
     document.getElementById('fim').addEventListener('mouseover', () => {
         pararCronometro();
         mostrarModal();
@@ -244,7 +241,6 @@
         }
     });
 
-    // Iniciar o cronômetro quando a página carregar
     document.addEventListener('DOMContentLoaded', () => {
         gerarLabirinto(matrizLabirinto);
         iniciarCronometro();
